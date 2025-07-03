@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1037624321320952665}
   - component: {fileID: 911052597882940347}
   - component: {fileID: -9096574930666869240}
+  - component: {fileID: 8277926927572497025}
   m_Layer: 0
   m_Name: Asteroid_Large03
   m_TagString: Untagged
@@ -190,5 +191,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f49797a765ee43429b89ede1fc1afe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CollisionDamage: 1
+  HealthMax: 3
+  Chunks:
+  - {fileID: 7742538769579603099, guid: c97b7e5f17e59904c82919ee7234023f, type: 3}
+  - {fileID: 6425233876476200329, guid: 0953c3ee3eb5219479ad24516821c656, type: 3}
+  - {fileID: 3839004381611571570, guid: f71e5dee7a2eb4649914a6b3cfe227d1, type: 3}
+  - {fileID: 1488422685117206681, guid: 6c79f680aabc0864381d4bad0521dd48, type: 3}
+  - {fileID: 8970655301659517957, guid: 53a5b53a451710848b81276133b14b05, type: 3}
+  - {fileID: 8117139704222143182, guid: 83c07de070ddce3429452126dd4154b5, type: 3}
+  ChunksMin: 1
+  ChunksMax: 4
+  ExplodeDist: 0.5
+  ExplosionForce: 10
+--- !u!114 &8277926927572497025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8835481235181284844}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aee2efd6486878a4da2d44801dc1c978, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
