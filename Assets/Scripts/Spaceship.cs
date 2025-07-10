@@ -17,6 +17,10 @@ public class Spaceship : MonoBehaviour
     public float FiringRate = 0.33f;
     private float fireTimer = 0f;
 
+    [Header("Sound")]
+    public SoundPlayer HitSounds;
+    public SoundPlayer DieSounds;
+
     private Rigidbody2D rb2D;
 
     #endregion
@@ -69,6 +73,8 @@ public class Spaceship : MonoBehaviour
         HealthCurrent = HealthCurrent - damage;
         //HealthCurrent -= damage; another way of writing the above
 
+        HitSounds.PlayRandomSound();
+
         //If current health is zero, then Explode
         if(HealthCurrent <= 0)
         {
@@ -78,6 +84,7 @@ public class Spaceship : MonoBehaviour
 
     public void Explode()
     {
+        DieSounds.PlaySound(false);
         //Destroy the ship, end the game
         Debug.Log("Game Over");
         Destroy(gameObject);

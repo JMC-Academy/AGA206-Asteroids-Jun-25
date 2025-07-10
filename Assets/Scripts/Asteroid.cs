@@ -2,13 +2,16 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
+    [Range(1,3)]
+    public int SpawnValue = 3;
+    [Space]
     public int CollisionDamage = 1;
     public int HealthMax = 3;
     private int HealthCurrent;
     [Header("Explosion Stuff")]
-    public GameObject[] Chunks;
     public int ChunksMin = 0;
     public int ChunksMax = 4;
+    public GameObject[] Chunks;
     public float ExplodeDist = 0.5f;
     public float ExplosionForce = 10f;
 
