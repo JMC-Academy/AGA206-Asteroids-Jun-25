@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Spaceship : MonoBehaviour
 {
-
     #region Variables
     public float EnginePower = 10f;
     public float TurnPower = 10f;
@@ -20,6 +19,9 @@ public class Spaceship : MonoBehaviour
     [Header("Sound")]
     public SoundPlayer HitSounds;
     public SoundPlayer DieSounds;
+
+    [Header("UI")]
+    public ScreenFlash Flash;
 
     private Rigidbody2D rb2D;
 
@@ -74,6 +76,8 @@ public class Spaceship : MonoBehaviour
         //HealthCurrent -= damage; another way of writing the above
 
         HitSounds.PlayRandomSound();
+
+        StartCoroutine(Flash.FlashRoutine());
 
         //If current health is zero, then Explode
         if(HealthCurrent <= 0)
