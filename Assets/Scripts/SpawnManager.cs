@@ -37,6 +37,7 @@ public class SpawnManager : MonoBehaviour
 
         // Find a random spawn point
         Vector3 spawnPoint = RandomOffscreenPoint();
+        spawnPoint.z = transform.position.z;
 
         // Spawn the asteroid
         GameObject asteroid = Instantiate(asteroidRef, spawnPoint, transform.rotation);

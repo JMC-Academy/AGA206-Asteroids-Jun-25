@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using UnityEngine;
 
 public class Spaceship : MonoBehaviour
@@ -22,6 +23,12 @@ public class Spaceship : MonoBehaviour
 
     [Header("UI")]
     public ScreenFlash Flash;
+    public ScreenShake Shake;
+    public GameOverUI GameOverUI;
+
+    [Header("Score")]
+    public int Score;
+    public int HighScore;
 
     private Rigidbody2D rb2D;
 
@@ -31,6 +38,7 @@ public class Spaceship : MonoBehaviour
     {
         rb2D = GetComponent<Rigidbody2D>();
         HealthCurrent = HealthMax;
+        HighScore = GetHighScore();
     }
 
     private void Update()
@@ -41,6 +49,12 @@ public class Spaceship : MonoBehaviour
         ApplyThrust(vertical);
         ApplyTorque(horizontal);
         UpdateFiring();
+
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            PlayerPrefs.DeleteAll();
+            //PlayerPrefs.DeleteKey("HighScore");
+        }
     }
 
     private void UpdateFiring()
@@ -78,9 +92,10 @@ public class Spaceship : MonoBehaviour
         HitSounds.PlayRandomSound();
 
         StartCoroutine(Flash.FlashRoutine());
+        StartCoroutine(Shake.ShakeRoutine());
 
         //If current health is zero, then Explode
-        if(HealthCurrent <= 0)
+        if (HealthCurrent <= 0)
         {
             Explode();
         }
@@ -90,7 +105,8 @@ public class Spaceship : MonoBehaviour
     {
         DieSounds.PlaySound(false);
         //Destroy the ship, end the game
-        Debug.Log("Game Over");
+        //Debug.Log("Game Over");
+        GameOver();
         Destroy(gameObject);
     }
 
@@ -106,4 +122,24 @@ public class Spaceship : MonoBehaviour
 
     }
 
+    public int GetHighScore()
+    {
+        return PlayerPrefs.GetInt("HighScore", 0);
+    }
+
+    public void SetHighScore(int score)
+    {
+        PlayerPrefs.SetInt("HighScore", score);
+    }
+
+    public void GameOver()
+    {
+        bool celebrateHighScore = false;
+        if(Score > GetHighScore() && celebrateHighScore == false)
+        {
+            SetHighScore(Score);
+            celebrateHighScore = true;
+        }
+        GameOverUI.Show(celebrateHighScore, Score, GetHighScore());
+    }
 }
