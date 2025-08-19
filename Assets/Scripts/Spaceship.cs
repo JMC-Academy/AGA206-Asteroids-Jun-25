@@ -1,9 +1,16 @@
-using System.ComponentModel;
 using UnityEngine;
+
+public enum PowerUp
+{
+    Single, Double, Laser, Homing
+}
+
 
 public class Spaceship : MonoBehaviour
 {
     #region Variables
+    public PowerUp CurrentPowerUp;
+    public SpriteRenderer SpriteRenderer;
     public float EnginePower = 10f;
     public float TurnPower = 10f;
 
@@ -39,6 +46,10 @@ public class Spaceship : MonoBehaviour
         rb2D = GetComponent<Rigidbody2D>();
         HealthCurrent = HealthMax;
         HighScore = GetHighScore();
+        SpriteRenderer.color = ColorX.GetRandomColor();
+
+        CurrentPowerUp = PowerUp.Single;
+        SpriteRenderer.enabled = false;
     }
 
     private void Update()
@@ -112,14 +123,20 @@ public class Spaceship : MonoBehaviour
 
     public void FireBullet()
     {
-        //Create a new bullet at the spaceships position and rotation
-        GameObject bullet = Instantiate(BulletPrefab, transform.position, transform.rotation);
-        //Find the bullets rigidbody component
-        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        //Create a force to push the bullet 'up' from the spaceships facing direction
-        Vector2 force = transform.up * BulletSpeed;
-        rb.AddForce(force);
-
+        if(CurrentPowerUp == PowerUp.Single)
+        {
+            //Create a new bullet at the spaceships position and rotation
+            GameObject bullet = Instantiate(BulletPrefab, transform.position, transform.rotation);
+            //Find the bullets rigidbody component
+            Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+            //Create a force to push the bullet 'up' from the spaceships facing direction
+            Vector2 force = transform.up * BulletSpeed;
+            rb.AddForce(force);
+        }
+        if(CurrentPowerUp == PowerUp.Double)
+        {
+            //Do Double stuff
+        }
     }
 
     public int GetHighScore()
